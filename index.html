@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="InterDyn: Controllable Interactive Dynamics with Video Diffusion Models">
+  <meta name="keywords" content="interdyn, controllable, interactive, dynamics, video diffusion, model">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>InterDyn: Controllable Interactive Dynamics with Video Diffusion Models</title>
+
+  <link href="./static/css/google_sans_noto_sans_castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <script src="./static/js/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">InterDyn: Controllable Interactive Dynamics with Video Diffusion Models</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://rickakkerman.github.io/" target="_blank">Rick Akkerman</a><sup>1</sup><sup> 2*</sup>,</span>
+            <span class="author-block">
+              <a href="https://havenfeng.github.io/" target="_blank">Haiwen Feng</a><sup>1*</sup>,</span>
+            <span class="author-block">
+              <a href="https://ps.is.mpg.de/person/black" target="_blank">Michael J. Black</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://dtzionas.com/" target="_blank">Dimitrios Tzionas</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://is.mpg.de/~vabrevaya" target="_blank">Victoria Fernández Abrevaya</a><sup>1</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Max Planck Institute for Intelligent Systems, Tübingen, Germany,</span><br>
+            <span class="author-block"><sup>2</sup>University of Amsterdam, the Netherlands</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://rickakkerman.github.io/" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <img src="./static/images/pdf.svg" width="15">
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- ArXiv Link. -->
+              <!-- <span class="link-block">
+                <a href="https://rickakkerman.github.io/" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <img src="./static/images/arxiv.svg" width="15">
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#" target="_blank"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <img src="./static/images/github.svg" width="15">
+                  </span>
+                  <span>Code coming soon</span>
+                  </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+
+<section class="hero teaser">
+  <div class="columns is-centered">
+    <div class="column is-7">
+      <img src="./static/images/teaser.jpg">
+
+      <h2 class="subtitle has-text-justified" style="font-size:18px;">
+        InterDyn: Given an image and a driving motion in the form of a mask sequence,
+        our model generates scene dynamics that are physically plausible without 3D reconstruction and physics simulation.
+        We investigate the generated interactive dynamics under simulated settings and in-the-wild HOI scenarios.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<br>
+<br>
+<section class="hero teaser text-font">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Object collision events</h2>
+      <div class="content has-text-justified">
+        <p>
+        We start our investigation by probing the ability of SVD to generate interactive dynamics
+        using the synthetic <a href="http://clevrer.csail.mit.edu/" target="_blank">CLEVRER</a> dataset.
+        Our primary goal is to assess whether InterDyn can generate future frames that are physically
+        plausible in response to introduced interactions. Specifically, we examine whether the model
+        can produce meaningful object movements for uncontrolled objects in the scene, given the movement
+        of objects entering the scene. For instance, determining how an object would move if struck by another.
+        </p>
+      </div>
+    </div>
+  </div>
+  <br>
+</section>
+
+<body>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-4">Force propagation</h2>
+        </div>
+      </div>
+      <div class="columns is-centered is-multiline">
+        <div class="column is-half">
+          <h2 class="subtitle has-text-centered small_font">Input</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <h2 class="subtitle has-text-centered small_font">Ours</h2>
+        </div>
+        <div class="column is-one-quarter">
+          <h2 class="subtitle has-text-centered small_font">Ground Truth</h2>
+        </div>
+      </div>
+      <div id="results-carousel" class="carousel results-carousel">
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/single/10006.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/multi/10026.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/single/10027.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/multi/10040.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/single/10078.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/multi/10071.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/single/10377.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/multi/10342.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-4">Counterfactuals</h2>
+        </div>
+      </div>
+      <div class="columns is-centered is-multiline">
+        <div class="column is-two-third">
+          <h2 class="subtitle has-text-centered small_font">Input</h2>
+        </div>
+        <div class="column is-one-third">
+          <h2 class="subtitle has-text-centered small_font">Ours</h2>
+        </div>
+      </div>
+      <div id="results-carousel" class="carousel results-carousel">
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/counterfactual/10007.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/counterfactual/10044.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline height="100%">
+          <source src="./static/videos/clevrer/counterfactual/10154.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<br>
+<br>
+<section class="hero teaser text-font">
+  <div class="columns is-centered has-text-centered">
+    <div class="column is-four-fifths">
+      <h2 class="title is-3">Hand-Object Interaction</h2>
+      <div class="content has-text-justified">
+        <p>
+        We continue by evaluating InterDyn in more complex, real-world scenarios offered by the
+        <a href="https://www.qualcomm.com/developer/software/something-something-v-2-dataset" target="_blank">Something-Something-v2</a> dataset.
+        Originally proposed for human action recognition and video understanding, this dataset provides 220,847 videos of humans performing
+        basic actions with everyday objects. It contains actions like “pushing [something] from left to right”, “squeezing [something]” and “lifting
+        [something] with [something] on it”.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-4">Results</h2>
+        </div>
+      </div>
+      <div class="columns is-centered is-multiline">
+        <div class="column is-two-third">
+          <h2 class="subtitle has-text-centered small_font">Input</h2>
+        </div>
+        <div class="column is-one-third">
+          <h2 class="subtitle has-text-centered small_font">Ours</h2>
+        </div>
+      </div>
+      <div id="results-carousel" class="carousel results-carousel">
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/243.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/8445.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/171797.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/208810.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/142383.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/191021.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/182974.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/180057.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/102979.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/11977.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/122203.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/118009.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/176110.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/141667.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/190017.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/something/177735.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-11">
+          <h2 class="title is-4">Baseline comparison</h2>
+        </div>
+      </div>
+      <div class="columns is-centered is-multiline">
+        <div class="column is-two-fifth">
+          <h2 class="subtitle has-text-centered small_font">Input</h2>
+        </div>
+        <div class="column is-one-fifth">
+          <h2 class="subtitle has-text-centered small_font">Ours</h2>
+        </div>
+        <div class="column is-one-fifth">
+          <h2 class="subtitle has-text-centered small_font">CosHand frame-by-frame</h2>
+        </div>
+        <div class="column is-one-fifth">
+          <h2 class="subtitle has-text-centered small_font">CosHand auto-regressive</h2>
+        </div>
+      </div>
+      <div id="results-carousel" class="carousel results-carousel">
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/7292.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/108453.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/12738.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/24815.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/31679.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/33576.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/35185.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/36515.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/36808.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/44374.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/46193.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/60535.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/64660.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/71985.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/75832.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/84613.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/86009.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/87275.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/87997.mp4" type="video/mp4">
+        </video>          
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/90289.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/107115.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/126821.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/137875.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/143000.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/150305.mp4" type="video/mp4">
+        </video>
+        <video poster="" autoplay controls muted loop playsinline width="100%">
+          <source src="./static/videos/baseline/155024.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="content has-text-centered">
+            <a class="icon-link"
+                href="">
+            <i class="fas fa-file-pdf"></i>
+            </a>
+        </div>
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p>This webpage is built with the template from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a>. We sincerely thank <a href="https://keunhong.com/">Keunhong Park</a> for developing and open-sourcing this template.</p>
+      <p><small>© 2024 Max-Planck-Gesellschaft <small class="text-muted ml-1 mr-1">-</small><a href="imprint.html">Imprint</a><small class="text-muted ml-1 mr-1">-</small><a href="privacy-policy.html">Privacy Policy</a><small class="text-muted ml-1 mr-1">-</small><a href="license.html">License</a></small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
